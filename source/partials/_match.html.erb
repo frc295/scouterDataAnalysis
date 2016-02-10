@@ -10,13 +10,12 @@
   </thead>
   <tbody>
   <% x = 0 %>
-  <% data.matches.values.sort_by(&:match).select{ |item| item[:device] == 1 }.each do |matchData| %>
     <% x += 1 %>
     <% blueTeamScore = 0 %>
     <% redTeamScore = 0 %>
     <% blueTeam = Array.new %>
     <% redTeam = Array.new %>
-    <% data.matches.values.sort_by(&:team).select{ |item| item[:match] == x }.each do |match| %>
+    <% data.matches.values.sort_by(&:team).select{ |item| item[:match] == match_id }.each do |match| %>
       <% if match.side == "blue" %>
         <% blueTeamScore += match.team_score %>
         <% blueTeam << match.team %>
@@ -41,20 +40,5 @@
           <% end %>
         </td>
       </tr>
-  <% end %>
   </tbody>
 </table>
-
-<% if false %>
-  Ignore
-
-
-<% data.matches.values.sort_by(&:team).select{ |item| item[:team] == 1 }.each do |match| %>
-<% end %>
-
-
-<% test123 += match.test[0].values.join.to_i %>
-
-
-
-<% end %>

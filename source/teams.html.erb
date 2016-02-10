@@ -13,7 +13,7 @@
       <% if !counted %>
         <% autonomous[0] << auto.keys.join.to_s %>
       <% end %>
-      
+
       <% if !counted %>
         <% autonomous[1] << Array.new() %>
       <% end %>
@@ -37,7 +37,10 @@ Team: <%= match_team %>
 <br>
 Total Score: <%= totalScore %>
 <br>
-Matches: <%= matches %>
+Matches:
+<% matches.each do |match| %>
+  <a href="/match/<%= match %>.html"><%= match %> </a>
+<% end %>
 <br>
 Average Score: <%= totalScore/matches.length %>
 <br>
@@ -54,9 +57,9 @@ Full Array: <%= autonomous %>
 <br>
 <% loops = 0 %>
 <% autonomous[0].each do |auto| %>
-  <%= auto %>: 
+  <%= auto %>:
   <% autonomous[1][loops].each do |value| %>
-    <%= value %> 
+    <%= value %>
   <% end %>
    Avg: <%= autonomous[2][loops] %>
   <% loops += 1 %>

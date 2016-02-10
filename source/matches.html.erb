@@ -1,2 +1,43 @@
-<%= partial "partials/row" %>
-test
+<% match_id %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Blue Score</th>
+      <th>Blue Team</th>
+      <th>Red Score</th>
+      <th>Red Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% blueTeamScore = 0 %>
+    <% redTeamScore = 0 %>
+    <% blueTeam = Array.new %>
+    <% redTeam = Array.new %>
+    <% data.matches.values.sort_by(&:team).select{ |item| item[:match] == match_id }.each do |match| %>
+      <% if match.side == "blue" %>
+        <% blueTeamScore += match.team_score %>
+        <% blueTeam << match.team %>
+      <% else %>
+        <% redTeamScore += match.team_score %>
+        <% redTeam << match.team %>
+      <% end %>
+    <% end %>
+
+      <tr>
+        <th scope="row"><%= match_id %></th>
+        <td><%= blueTeamScore %></td>
+        <td>
+          <% blueTeam.each do |team| %>
+            <a href="/team/<%= team %>.html"><%= team %></a>
+          <% end %>
+        </td>
+        <td><%= redTeamScore %></td>
+        <td>
+          <% redTeam.each do |team| %>
+            <a href="/team/<%= team %>.html"><%= team %></a>
+          <% end %>
+        </td>
+      </tr>
+  </tbody>
+</table>
