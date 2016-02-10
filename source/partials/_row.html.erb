@@ -1,0 +1,52 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Blue Score</th>
+      <th>Blue Team</th>
+      <th>Red Score</th>
+      <th>Red Team</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% x = 0 %>
+  <% data.matches.values.sort_by(&:match).select{ |item| item[:device] == 1 }.each do |matchData| %>
+    <% x += 1 %>
+    <% blueTeamScore = 0 %>
+    <% redTeamScore = 0 %>
+    <% blueTeam = Array.new %>
+    <% redTeam = Array.new %>
+    <% data.matches.values.sort_by(&:team).select{ |item| item[:match] == x }.each do |match| %>
+      <% if match.side == "blue" %>
+        <% blueTeamScore += match.team_score %>
+        <% blueTeam << match.team %>
+      <% else %>
+        <% redTeamScore += match.team_score %>
+        <% redTeam << match.team %>
+      <% end %>
+    <% end %>
+
+      <tr>
+        <th scope="row"><%= x %></th>
+        <td><%= blueTeamScore %></td>
+        <td><%= blueTeam %></td>
+        <td><%= redTeamScore %></td>
+        <td><%= redTeam %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% if false %>
+  Ignore
+
+
+<% data.matches.values.sort_by(&:team).select{ |item| item[:team] == 1 }.each do |match| %>
+<% end %>
+
+
+<% test123 += match.test[0].values.join.to_i %>
+
+
+
+<% end %>

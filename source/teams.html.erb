@@ -1,0 +1,44 @@
+<% totalScore = 0 %>
+<% totalMatches = 0 %>
+<% scores = Array.new %>
+<% matches = Array.new %>
+<% autoValuesNames = Array.new %>
+<% autoValues = Array.new(Array.new()) %>
+<% autoAverages = Array.new() %>
+<% counted = false %>
+<% data.matches.values.sort_by(&:match).select{ |item| item[:team] == match_team }.each do |matchData| %>
+    <% loops = 0 %>
+    <% totalScore += matchData.team_score %>
+    <% matchData.auto.each do |auto| %>
+      <% if !counted %>
+        <% autoValues << Array.new %>
+        <% autoValuesNames << auto.keys.join.to_s %>
+      <% end %>
+      <% autoValues[loops] << auto.values.join.to_i %>
+      <% loops += 1 %>
+    <% end %>
+    <% counted = true %>
+    <% totalMatches += 1 %>
+<% end %>
+
+<% loops = 0 %>
+<% autoValues.each do |values| %>
+  <% temp = 0 %>
+  <% values.each do |value| %>
+    <% temp += value %>
+  <% end %>
+  <% autoAverages << temp.to_f/totalMatches %>
+  <% loops += 1 %>
+<% end %>
+Auto Value Names: <%= autoValuesNames %>
+<br>
+Auto Values: <%= autoValues %>
+<br>
+Auto Averages: <%= autoAverages %>
+<br>
+Team: <%= match_team %>
+<br>
+Total Score: <%= totalScore %>
+<br>
+Average Score: <%= totalScore/totalMatches %>
+<%autoValues.at(0).at(1) %>
