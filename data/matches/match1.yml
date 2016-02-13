@@ -5,7 +5,7 @@ side: "red"
 team_score: 43
 device: 1
 auto:
-  - reach: 8
+  - reach: 4
   - cross: 1
   - low: 3
   - high: 5

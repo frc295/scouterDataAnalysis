@@ -3,3 +3,7 @@
  *= require vendor/_bootstrap.css
  *= require vendor/_bootstrap-theme.css
  */
+.ct-label {
+  font-size: 0.8em;
+  color: black;
+}

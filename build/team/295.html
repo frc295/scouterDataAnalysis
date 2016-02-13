@@ -12,7 +12,170 @@
   </head>
 
   <body class="">
-    295
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Team: 295
+<br>
+Total Score: 243
+<br>
+Matches:
+  <a href="/match/1.html">1 </a>
+  <a href="/match/2.html">2 </a>
+  <a href="/match/3.html">3 </a>
+  <a href="/match/4.html">4 </a>
+<br>
+Average Score: 60
+<br>
+<br>
+Auto Value Names: ["reach", "cross", "low", "high", "defense"]
+<br>
+Auto Values: [[8, 2, 5, 5], [1, 1, 1, 2], [3, 3, 3, 5], [5, 5, 6, 7], [2, 2, 6, 6]]
+<br>
+Auto Averages: [5.0, 1.25, 3.5, 5.75, 4.0]
+
+<br>
+Full Array: [["reach", "cross", "low", "high", "defense"], [[8, 2, 5, 5], [1, 1, 1, 2], [3, 3, 3, 5], [5, 5, 6, 7], [2, 2, 6, 6]], [5.0, 1.25, 3.5, 5.75, 4.0]]
+
+<br>
+
+  reach:
+    8
+    2
+    5
+    5
+   Avg: 5.0
+  <br>
+  cross:
+    1
+    1
+    1
+    2
+   Avg: 1.25
+  <br>
+  low:
+    3
+    3
+    3
+    5
+   Avg: 3.5
+  <br>
+  high:
+    5
+    5
+    6
+    7
+   Avg: 5.75
+  <br>
+  defense:
+    2
+    2
+    6
+    6
+   Avg: 4.0
+  <br>
+[8, 2, 5, 5]
+
+<div class="row">
+    <div class="col-md-4">
+      reach
+      <div class="ct-chart" id="reach"></div>
+    </div>
+    <div class="col-md-4">
+      cross
+      <div class="ct-chart" id="cross"></div>
+    </div>
+    <div class="col-md-4">
+      low
+      <div class="ct-chart" id="low"></div>
+    </div>
+    <div class="col-md-4">
+      high
+      <div class="ct-chart" id="high"></div>
+    </div>
+    <div class="col-md-4">
+      defense
+      <div class="ct-chart" id="defense"></div>
+    </div>
+</div>
+<script>
+  var options = {
+    width: 300,
+    height: 300
+  };
+
+    new Chartist.Line('#reach', {
+      labels: ['1', '2', '3', '4'],
+      series: [[8, 2, 5, 5]],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    });
+    new Chartist.Line('#cross', {
+      labels: ['1', '2', '3', '4'],
+      series: [[1, 1, 1, 2]],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    });
+    new Chartist.Line('#low', {
+      labels: ['1', '2', '3', '4'],
+      series: [[3, 3, 3, 5]],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    });
+    new Chartist.Line('#high', {
+      labels: ['1', '2', '3', '4'],
+      series: [[5, 5, 6, 7]],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    });
+    new Chartist.Line('#defense', {
+      labels: ['1', '2', '3', '4'],
+      series: [[2, 2, 6, 6]],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    });
+
+
+</script>
 
 
     <script src="https://cdn.jsdelivr.net/g/jquery@3.0.0-alpha1,bootstrap@3.3.5"></script>
