@@ -5,8 +5,8 @@ all_matches = Dir.foreach('./data/matches').map do |file|
   YAML::load_file(File.join(__dir__, 'data/matches/' + file))
 end.compact
 
-all_matches.each do |match|
-  match_id = match['match']
+all_matches.each do |matches|
+  match_id = matches['match']
   proxy "/match/#{match_id}.html", "/matches.html",
     layout: "main",
     ignore: true,

@@ -6,21 +6,22 @@
 <% autonomous << Array.new() << Array.new() << Array.new() %>
 <% counted = false %>
 <% data.matches.values.sort_by(&:match).select{ |item| item[:team] == match_team }.each do |matchData| %>
-    <% loops = 0 %>
-    <% totalScore += matchData.team_score %>
-    <% matches << matchData.match %>
-    <% matchData.auto.each do |auto| %>
-      <% if !counted %>
-        <% autonomous[0] << auto.keys.join.to_s %>
-      <% end %>
-
-      <% if !counted %>
-        <% autonomous[1] << Array.new() %>
-      <% end %>
-      <% autonomous[1][loops] << auto.values.join.to_i %>
-      <% loops += 1 %>
+  <% loops = 0 %>
+  <% totalScore += matchData.team_score %>
+  <% scores << matchData.team_score %>
+  <% matches << matchData.match %>
+  <% matchData.auto.each do |auto| %>
+    <% if !counted %>
+      <% autonomous[0] << auto.keys.join.to_s %>
     <% end %>
-    <% counted = true %>
+
+    <% if !counted %>
+      <% autonomous[1] << Array.new() %>
+    <% end %>
+    <% autonomous[1][loops] << auto.values.join.to_i %>
+    <% loops += 1 %>
+  <% end %>
+  <% counted = true %>
 <% end %>
 
 <% loops = 0 %>
@@ -29,7 +30,7 @@
   <% values.each do |value| %>
     <% temp += value %>
   <% end %>
-  <% autonomous[2] << (temp.to_f/matches.length).round(2) %>
+  <% autonomous[2] << (temp.to_f/values.length).round(2) %>
   <% loops += 1 %>
 <% end %>
 
@@ -44,6 +45,66 @@ Matches:
 <br>
 Average Score: <%= totalScore/matches.length %>
 <br>
+
+<div class="row">
+    <div class="col-md-4">
+        Score
+      <div class="ct-chart" id="score"></div>
+    </div>
+  <% loops = 0 %>
+  <% autonomous.first.each do |autonomous_variable| %>
+    <div class="col-md-4">
+      <%= autonomous_variable %>
+      <div class="ct-chart" id="<%= autonomous_variable %>"></div>
+    </div>
+    <% loops += 1 %>
+  <% end %>
+</div>
+<script>
+    <% temp = Array.new %>
+    <% matches.each do |match|  %>
+      <% temp << totalScore/matches.length %>
+    <% end %>
+    new Chartist.Line('#score', {
+      labels: <%= matches %>,
+      series: [<%= scores %>, <%= temp %>],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    low: 0,
+    showArea: true,
+    showPoint: false,
+    });
+
+  <% loops = 0 %>
+  <% autonomous.first.each do |autonomous_variable| %>
+    <% temp = Array.new %>
+    <% autonomous[1][loops].each do |auto_variable|  %>
+      <% temp << autonomous[2][loops] %>
+    <% end %>
+    new Chartist.Line('#<%= autonomous_variable %>', {
+      labels: <%= matches %>,
+      series: [<%= autonomous[1][loops] %>, <%= temp %>],
+    }, {
+    chartPadding: {
+      top: 10,
+      right: 10
+    },
+    height: 300,
+    high: 10,
+    low: 0,
+    showArea: true,
+    showPoint: false,
+    });
+    <% loops += 1 %>
+  <% end %>
+
+
+</script>
+
 <br>
 Auto Value Names: <%= autonomous[0] %>
 <br>
@@ -55,50 +116,3 @@ Auto Averages: <%= autonomous[2] %>
 Full Array: <%= autonomous %>
 
 <br>
-
-<% loops = 0 %>
-<% autonomous[0].each do |auto| %>
-  <%= auto %>:
-  <% autonomous[1][loops].each do |value| %>
-    <%= value %>
-  <% end %>
-   Avg: <%= autonomous[2][loops] %>
-  <% loops += 1 %>
-  <br>
-<% end %>
-
-<div class="row">
-  <% loops = 0 %>
-  <% autonomous.first.each do |autonomous_variable| %>
-    <div class="col-md-4">
-      <%= autonomous_variable %>
-      <div class="ct-chart" id="<%= autonomous_variable %>"></div>
-    </div>
-    <% loops += 1 %>
-  <% end %>
-</div>
-<script>
-  var options = {
-    width: 300,
-    height: 300
-  };
-
-  <% loops = 0 %>
-  <% autonomous.first.each do |autonomous_variable| %>
-    new Chartist.Line('#<%= autonomous_variable %>', {
-      labels: <%= matches %>,
-      series: [<%= autonomous[1][loops] %>],
-    }, {
-    chartPadding: {
-      top: 10,
-      right: 10
-    },
-    height: 300,
-    high: 10,
-    low: 0
-    });
-    <% loops += 1 %>
-  <% end %>
-
-
-</script>

@@ -1,0 +1,24 @@
+{
+  "match": 1,
+  "team": 1125,
+  "side": "red",
+  "team_score": 23,
+  "device": 3,
+  "auto": [
+      {
+          "reach": 4
+      },
+      {
+          "cross": 1
+      },
+      {
+          "low": 3
+      },
+      {
+          "high": 5
+      },
+      {
+          "defense": 2
+      }
+  ]
+}
